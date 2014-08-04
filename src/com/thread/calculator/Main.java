@@ -40,6 +40,9 @@ public class Main {
 	        threads[i].start();
 	      }
 		
+		/*for (int i=0; i<10; i++){
+	        threads[i].start();
+	      }*/
 		
 		boolean finish=false;
 	      while (!finish) {

@@ -14,5 +14,10 @@ public class Calculator implements Runnable{
 		
 	}
 	
+	
+	void nust()
+	{
+		System.out.printf("%s: %d * %d = %d\n",Thread.currentThread().getName(),number);
+	}
 
 }
