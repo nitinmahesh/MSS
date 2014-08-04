@@ -14,9 +14,14 @@ public class Main {
 		Thread t1 = new Thread(b);
 		t.setName("t");
 		t1.setName("t1");
+		t.setPriority(Thread.MAX_PRIORITY);
+		t1.setPriority(Thread.MIN_PRIORITY);
+		
 		t.start();
 		t1.start();
 		t1.join();
+		
+		
 		
 	}
 }
