@@ -1,13 +1,16 @@
 package com.thread.calculator;
 
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.lang.Thread.State;
 
 public class Main {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		Thread threads[]=new Thread[10];
 	    Thread.State status[]=new Thread.State[10];
 	    
@@ -21,28 +24,29 @@ public class Main {
 	        threads[i].setName("Thread "+i);
 	      }
 	    
+	    //java.io.FileOutputStream fos = new java.io.FileOutputStream("c://abc.dat");		
+		
 	    FileWriter file=null;
-	    PrintWriter pw;
+	    //PrintWriter pw;
+	    
 		try {
-			file = new FileWriter("C:\\mss\\log.dat");
+			//file = new FileWriter("C:\\mss\\log.dat");
+			file = new FileWriter("C:\\Users\\nitinmah\\Documents\\Nitin\\Mss\\out.txt");
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		pw = new PrintWriter(file);	
+		BufferedWriter pw = new BufferedWriter(file);
+		//pw = new PrintWriter(file);	
 		for (int i=0; i<10; i++){
-			pw.println("Main : Status of Thread "+i+" : "  +             threads[i].getState());
-			        status[i]=threads[i].getState();
-			      }
+			pw.write("Main : Status of Thread "+i+" : " + threads[i].getState() + "\n");
+			status[i]=threads[i].getState();
+	     }
 		
 		for (int i=0; i<10; i++){
 	        threads[i].start();
 	      }
-		
-		/*for (int i=0; i<10; i++){
-	        threads[i].start();
-	      }*/
 		
 		boolean finish=false;
 	      while (!finish) {
@@ -59,18 +63,18 @@ public class Main {
 	      }
 	      
 	      
-		
+	      pw.close();
 		
 	    		
 	    		
 	}
 	
-	private static void writeThreadInfo(PrintWriter pw, Thread thread, State state) {
-		pw.printf("Main : Id %d - %s\n",thread.getId(),thread.getName());
-		pw.printf("Main : Priority: %d\n",thread.getPriority());
-		pw.printf("Main : Old State: %s\n",state);
-		pw.printf("Main : New State: %s\n",thread.getState());
-		pw.printf("Main : ************************************\n");
+	private static void writeThreadInfo(BufferedWriter pw, Thread thread, State state) throws IOException {
+		pw.write("Main : Id "+ thread.getId() +" - "+thread.getName()+"\n");
+		pw.write("Main : Priority: "+ thread.getPriority() +"\n");
+		pw.write("Main : Old State: "+ state +"\n");
+		pw.write("Main : New State: "+ thread.getState() +"\n");
+		pw.write("Main : ************************************\n");
 		  }
 
 }
